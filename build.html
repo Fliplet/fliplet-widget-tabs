@@ -1,0 +1,17 @@
+<div class="fl-tabs-container" data-tabs-id="{{id}}" data-tabs-uuid="{{ uuid }}">
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    {{#each tabs}}
+    <li {{#unless @index}}class="active"{{/unless}}>
+      <a href="#">{{name}}</a>
+    </li>
+    {{/each}}
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    {{#each tabs}}
+    <div class="tab-pane {{#unless @index}}active{{/unless}}"></div>
+    {{/each}}
+  </div>
+</div>

@@ -1,0 +1,33 @@
+{
+  "name": "Tabs",
+  "package": "com.fliplet.tabs",
+  "version": "1.0.0",
+  "icon": "img/icon.png",
+  "tags": ["type:component", "category:general"],
+  "provider_only": false,
+  "references": [],
+  "html_tag": "div",
+  "interface": {
+    "dependencies": [
+      "fliplet-core",
+      "fliplet-studio-ui"
+    ],
+    "assets": [
+      "js/interface.js"
+    ]
+  },
+  "build": {
+    "dependencies": [
+      "jquery",
+      "bootstrap",
+      "font-awesome"
+    ],
+    "assets": [
+      "css/build.css",
+      "js/libs.js",
+      "js/build.templates.js",
+      "js/build.js"
+    ],
+    "appAssets": []
+  }
+}
