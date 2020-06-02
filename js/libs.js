@@ -7,6 +7,8 @@ Fliplet.Registry.set('tabs:1.0:core', function (element, data) {
   var mode = Fliplet.Env.get('mode');
   var isDev = Fliplet.Env.get('development');
 
+  data.tabs = data.tabs || []
+
   function registerHelpers() {
     Handlebars.registerHelper('isInteractable', function(options) {
       var result = mode === 'interact' || isDev;
@@ -27,30 +29,27 @@ Fliplet.Registry.set('tabs:1.0:core', function (element, data) {
   }
 
   function attachObeservers() {
-    $(document)
-      .on('click', '.fl-tabs-container .nav-tabs a:not(.add-new-tab)', function () {
-        var tab = $(this).parent();
-        var tabIndex = tab.index();
-        var tabs = $(this).closest('.nav-tabs');
-        var tabPanel = $(this).closest('.tab-content');
-        var tabPane = tabPanel.find('.tab-pane').eq(tabIndex);
+    $(element)
+      .on('click', '.nav-tabs a:not(.add-new-tab)', function () {
+        var $tab = $(this).parent();
+        var tabIndex = $tab.index();
+        var $tabs = $(element).find('.nav-tabs');
+        var $tabPanel = $(element).find('.tab-content');
+        var $tabPane = $tabPanel.find('.tab-pane').eq(tabIndex);
 
-        tabs.find('.active').removeClass('active');
-        tabPanel.find('.active').removeClass('active');
-        tab.addClass('active');
-        tabPane.addClass('active');
+        $tabs.find('.active').removeClass('active');
+        $tabPanel.find('.active').removeClass('active');
+        $tab.addClass('active');
+        $tabPane.addClass('active');
       })
-      .on('click', '.fl-tabs-container .nav-tabs a.add-new-tab', function () {
-        var numberOfTabs = $('.fl-tabs-container .nav-tabs a').length;
+      .on('click', '.nav-tabs a.add-new-tab', function () {
+        var numberOfTabs = $(element).find('.nav-tabs a').length;
 
         data.tabs.push({
           name: 'New tab ' + numberOfTabs
         });
 
-        saveTabs()
-          .then(function () {
-            Fliplet.Studio.emit('reload-widget-instance', data.id);
-          });
+        saveTabs(data);
       });
   }
 
@@ -60,8 +59,17 @@ Fliplet.Registry.set('tabs:1.0:core', function (element, data) {
     attachObeservers();
   }
 
-  function saveTabs() {
-    return Fliplet.Widget.save(data);
+  function saveTabs(widgetData) {
+    return Fliplet.API.request({
+      url: 'v1/widget-instances/' + widgetData.id,
+      method: 'PUT',
+      data: widgetData
+    })
+      .then(function (response) {
+        var widget = response.widgetInstance;
+
+        Fliplet.Studio.emit('reload-widget-instance', widget.id);
+      });
   } 
   
 

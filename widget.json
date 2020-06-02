@@ -5,8 +5,13 @@
   "icon": "img/icon.png",
   "tags": ["type:component", "category:general"],
   "provider_only": false,
-  "references": [],
+  "references": [
+    "tabs.$.html:richContent"
+  ],
   "html_tag": "div",
+  "settings": {
+    "allow_interface_edit": true
+  },
   "interface": {
     "dependencies": [
       "fliplet-core",
@@ -20,7 +25,8 @@
     "dependencies": [
       "jquery",
       "bootstrap",
-      "font-awesome"
+      "font-awesome",
+      "lodash"
     ],
     "assets": [
       "css/build.css",
