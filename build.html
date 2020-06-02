@@ -11,7 +11,9 @@
   <!-- Tab panes -->
   <div class="tab-content">
     {{#each tabs}}
-    <div class="tab-pane {{#unless @index}}active{{/unless}}" data-allow-component-drop="true"></div>
+    <div class="tab-pane {{#unless @index}}active{{/unless}}" data-allow-component-drop="true">
+      {{{html}}}
+    </div>
     {{/each}}
   </div>
 </div>
