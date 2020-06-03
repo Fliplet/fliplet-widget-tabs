@@ -6,11 +6,10 @@
 Fliplet.Registry.set('tabs:1.0:core', function (element, data) {
   var mode = Fliplet.Env.get('mode');
   var isDev = Fliplet.Env.get('development');
-  var WIDGET_INSTANCE_DATA = 'data-fl-widget-instance';
-  var WIDGET_INSTANCE_SELECTOR = '[' + WIDGET_INSTANCE_DATA + ']';
+  var WIDGET_INSTANCE_SELECTOR = '[data-fl-widget-instance]';
   var WIDGET_INSTANCE_ID_DATA = 'id';
 
-  data.tabs = data.tabs || []
+  data.tabs = data.tabs || [];
 
   function registerHelpers() {
     Handlebars.registerHelper('isInteractable', function(options) {
