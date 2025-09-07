@@ -25,8 +25,7 @@
     "dependencies": [
       "jquery",
       "bootstrap",
-      "font-awesome",
-      "lodash"
+      "font-awesome"
     ],
     "assets": [
       "css/build.css",
